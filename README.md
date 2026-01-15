@@ -8,8 +8,11 @@ Sistema avanzado de monitoreo ambiental que utiliza imágenes satelitales Sentin
 
 El Normalized Difference Chlorophyll Index (NDCI) es un algoritmo espectral diseñado para estimar la concentración de clorofila-a en aguas ópticamente complejas (aguas continentales y costeras).
 
-La FórmulaEl sistema calcula el NDCI utilizando las bandas del sensor Sentinel-2:$$NDCI = \frac{RedEdge (B5) - Red (B4)}{RedEdge (B5) + Red (B4)}$$Este índice es superior al NDVI tradicional en entornos acuáticos, ya que la banda RedEdge (705nm) captura con precisión la reflectancia del fitoplancton, eliminando el "ruido" del agua pura.
+La FórmulaEl sistema calcula el NDCI utilizando las bandas del sensor Sentinel-2:
 
+$$NDCI = \frac{RedEdge (B5) - Red (B4)}{RedEdge (B5) + Red (B4)}$$
+
+Este índice es superior al NDVI tradicional en entornos acuáticos, ya que la banda RedEdge (705nm) captura con precisión la reflectancia del fitoplancton, eliminando el "ruido" del agua pura.
 
 ## Visualización Científica: Cubo Espacio-Temporal
 
@@ -92,7 +95,9 @@ Basado en el entrenamiento histórico, el modelo proyecta una tendencia estable 
 
 - **Alertas:** No se detectan anomalías críticas para el primer semestre de 2026 bajo el modelo de tendencia actual.
 
+![alt text](data/reports/prediction_2026.png)
 
+![alt text](data/reports/prediction_full_2026.png)
 
 
 ## Instalación y Requisitos
