@@ -1,0 +1,6 @@
+credentials.json
+__pycache__/
+.venv
+.env
+llms.txt
+.vscode/

@@ -1,0 +1,16 @@
+[project]
+name = "llanquihue-analysis"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "earthengine-api>=1.7.4",
+    "geemap>=0.36.6",
+    "matplotlib>=3.10.8",
+    "numpy>=2.4.1",
+    "pandas>=2.3.3",
+    "pybind11>=3.0.1",
+    "pyvista>=0.46.5",
+    "scikit-learn>=1.8.0",
+]
