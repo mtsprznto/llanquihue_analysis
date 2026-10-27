@@ -1,6 +1,35 @@
+# Secretos
 credentials.json
-__pycache__/
-.venv
 .env
+
+# Entornos virtuales
+.venv
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Build C++ (setup_engine.py -> src/engine_cpp/lib/)
+*.pyd
+*.o
+*.obj
+*.dll
+*.pdb
+*.ilk
+*.exp
+build/
+
+# Contexto local (no versionado)
 llms.txt
+
+# Editor / sistema operativo
 .vscode/
+Thumbs.db
+desktop.ini
+
+# Logs locales
+*.log

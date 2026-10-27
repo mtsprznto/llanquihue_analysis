@@ -1,0 +1,33 @@
+# Normalización de finales de línea: el repositorio vive en LF, sin importar el SO.
+# Ver AGENTS.md, sección 1 "Finales de línea (bomba de tiempo)".
+* text=auto eol=lf
+
+# --- Binarios: git no los trata como texto ni intenta diffearlos ---
+*.npy   binary
+*.npz   binary
+*.pyd   binary
+*.dll   binary
+*.exe   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.pdf   binary
+*.zip   binary
+*.7z    binary
+*.zst   binary
+
+# --- Texto declarado explícitamente (evita heurísticas de auto-detección) ---
+*.py     text eol=lf
+*.md     text eol=lf
+*.toml   text eol=lf
+*.lock   text eol=lf
+*.json   text eol=lf
+*.txt    text eol=lf
+*.cpp    text eol=lf
+*.hpp    text eol=lf
+*.csv    text eol=lf
+
+# --- Datos generados: ~250k líneas por archivo, el diff no aporta nada ---
+data/raw_grids/*.csv  -diff
