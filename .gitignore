@@ -33,3 +33,6 @@ desktop.ini
 
 # Logs locales
 *.log
+
+# Datos derivados: el .npy es la fuente, el CSV se regenera en cada corrida
+data/raw_grids/*.csv

@@ -43,7 +43,7 @@ index_repository(
 )
 ```
 
-Estado actual del índice (2026-10-27, tras indexar `README.md` y este archivo): **179 nodos / 463 aristas**, `status=ready`, `head_sha=6e4fda0`. La base de código sola son 138/423; el delta corresponde a las secciones de `AGENTS.md`. En la primera indexación se omitió `data/raw_grids/grid_2023.csv` (`parse timeout`, 4 MB, es dato no código); `mode="fast"` ya no recorre CSV. Si se necesita su contenido, usar `search_code` con `path_filter` o leer por tramos; no reindexar en loop por esto.
+Estado actual del índice (2026-10-27, tras indexar `README.md` y este archivo): **181 nodos / 464 aristas**, `status=ready`, `head_sha=6e4fda0`. La base de código sola son 138/423; el delta corresponde a las secciones de `AGENTS.md`. Los `.csv` de `data/raw_grids/` dejaron de versionarse en el commit `d5a2832` (el `.npy` es la fuente), así que el índice ya no los ve; `mode="fast"` tampoco recorre CSV. En la primera indexación `grid_2023.csv` provocó un `parse timeout` (4 MB): si alguna vez hace falta su contenido, usar `search_code` con `path_filter` o leer por tramos, no reindexar en loop.
 
 ### Recetas verificadas
 
@@ -131,7 +131,7 @@ llanquihue_analysis/
 │       ├── viewer_3d.py         # PyVista: malla 3D
 │       └── time_series.py       # Matplotlib: serie histórica (MUERTO)
 ├── data/
-│   ├── raw_grids/               # .npy + .csv por año (372×669) + artefactos huérfanos
+│   ├── raw_grids/               # .npy versionados por año (372×669); los .csv son locales (gitignored)
 │   ├── processed/               # dataset mensual para IA (12×7)
 │   └── reports/                 # PNG generados + huérfanos
 └── build/                       # vacío (resto de build MSYS2)
@@ -226,12 +226,13 @@ Hechos verificados del flujo:
 
 ### Grillas (`data/raw_grids/`)
 
-- Formato: `{nombre}.npy` (`float64`, `shape=(372,669)`) + `{nombre}.csv` (`row,col,ndci_value`).
-- Tamaño actual: **248.868 píxeles** por grilla (`372×669`), 1.991.072 B por `.npy`, ~4 MB por `.csv`.
+- Formato: `{nombre}.npy` (`float64`, `shape=(372,669)`) **+** `{nombre}.csv` (`row,col,ndci_value`).
+- **Solo el `.npy` se versiona.** El `.csv` es un volcado de texto derivado (~2× el peso del `.npy`): lo escribe `exporter.py` y ningún módulo lo lee. Quedó en `.gitignore` tras el commit `d5a2832` y se regenera en cada corrida.
+- Tamaño actual: **248.868 píxeles** por grilla (`372×669`), 1.991.072 B por `.npy`, ~3,9 MB por `.csv` local (no versionado).
 - Proyección/escala de muestreo: `EPSG:4326`, `scale=150` m. El comentario de `exporter.py:13-15` explica el motivo: 100 m excedía el límite de 262.144 px de `sampleRectangle`.
 - `defaultValue=0` en `sampleRectangle`: **0 significa “sin dato”**, no “NDCI cero”. Esto condiciona máscaras, filtro C++ e interpolación.
 - Grillas activas: `grid_2019..grid_2025`, `present_state`.
-- Huérfanas (no las produce el código actual): `debug_llanquihue_shape.*`, `llanquihue_ndci_final.*`, `llanquihue_2026_01_15.*` (esta última es `298×557` = 165.986 px, ROI/escala antigua).
+- Huérfanas (no las produce el código actual): `debug_llanquihue_shape.*`, `llanquihue_ndci_final.*`, `llanquihue_2026_01_15.*` (esta última es `298×557` = 165.986 px, ROI/escala antigua). Sus `.npy` siguen versionados; los `.csv` correspondientes pasaron a locales tras `d5a2832`.
 
 ### Dataset IA (`data/processed/llanquihue_water_quality_dataset.csv`)
 
